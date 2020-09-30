@@ -1,10 +1,12 @@
 import 'dart:async';
-import 'dart:developer' as developer;
-
 import 'package:rxdart/rxdart.dart';
 import 'package:Test_task/data/repos/gif_api_repo.dart';
+import 'package:Test_task/data/models/gif_info.dart';
 import 'package:bloc/bloc.dart';
-import 'package:Test_task/all_gifs/index.dart';
+import 'package:equatable/equatable.dart';
+
+part 'all_gifs_event.dart';
+part 'all_gifs_state.dart';
 
 class AllGifsBloc extends Bloc<AllGifsEvent, InAllGifsState> {
   AllGifsBloc(InAllGifsState initialState) : super(initialState);

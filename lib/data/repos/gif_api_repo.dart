@@ -16,6 +16,7 @@ class GiphyApiRepo {
       return parseGifs(response.data['data']);
     } catch (e, _) {
       print("$e \n $_");
+      return null;
     }
   }
 }

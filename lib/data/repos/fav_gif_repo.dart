@@ -45,7 +45,7 @@ create table $tableGif (
       tableGif,
       columns: [columnId, url],
     );
-    List<GifInfo> gifs = maps.map((e) => GifInfo.fromJson(e)).toList();
+    List<GifInfo> gifs = maps.map((e) => GifInfo.fromMap(e)).toList();
     return gifs;
   }
 

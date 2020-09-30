@@ -23,8 +23,7 @@ class AddFavGifsEvent extends FavGifsEvent {
     yield StatusFavGifsState(dbGif.innerId != null
         ? "Гифка добавлена в избранное"
         : "Гифка уже в избранном");
-    yield UnFavGifsState();
-    yield InFavGifsState(await FavGifRepo().getAllFavGifs());
+    bloc.add(LoadFavGifsEvent());
   }
 }
 
@@ -37,8 +36,7 @@ class RemoveFavGifsEvent extends FavGifsEvent {
       {FavGifsState currentState, FavGifsBloc bloc}) async* {
     await FavGifRepo().delete(gif.innerId);
     yield DeletedFavGifsState();
-    yield UnFavGifsState();
-    yield new InFavGifsState(await FavGifRepo().getAllFavGifs());
+    bloc.add(LoadFavGifsEvent());
   }
 }
 

@@ -1,5 +1,4 @@
-import 'package:Test_task/data/models/gif_info.dart';
-import 'package:equatable/equatable.dart';
+part of 'all_gifs_bloc.dart';
 
 abstract class AllGifsState extends Equatable {
   final List propss;

@@ -1,3 +1,4 @@
+import 'package:Test_task/widgets/gif_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Test_task/fav_gifs/index.dart';
@@ -60,32 +61,11 @@ class FavGifsScreenState extends State<FavGifsScreen> {
                     mainAxisSpacing: 4.0,
                     crossAxisSpacing: 4.0,
                     staggeredTileBuilder: (int index) =>
-                        new StaggeredTile.count(2, index.isEven ? 2 : 1),
+                        new StaggeredTile.fit(2),
                     itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        elevation: 5,
-                        child: Stack(children: [
-                          Image.network(
-                            currentState.gifs[index].url,
-                            fit: BoxFit.fill,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                          ),
-                          Positioned(
-                            right: 0,
-                            child: IconButton(
-                                icon: Icon(Icons.delete_outline),
-                                onPressed: () {
-                                  BlocProvider.of<FavGifsBloc>(context).add(
-                                      RemoveFavGifsEvent(
-                                          currentState.gifs[index]));
-                                }),
-                          )
-                        ]),
+                      return GifItem(
+                        gifInfo: currentState.gifs[index],
+                        fav: true,
                       );
                     },
                     itemCount: currentState.gifs.length,

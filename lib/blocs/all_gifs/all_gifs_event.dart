@@ -1,6 +1,5 @@
-import 'package:meta/meta.dart';
+part of 'all_gifs_bloc.dart';
 
-@immutable
 abstract class AllGifsEvent {}
 
 class LoadAllGifsEvent extends AllGifsEvent {}
