@@ -19,7 +19,7 @@ class AddFavGifsEvent extends FavGifsEvent {
   @override
   Stream<FavGifsState> applyAsync(
       {FavGifsState currentState, FavGifsBloc bloc}) async* {
-    GifInfo dbGif = await FavGifRepo().insert(gif);
+    GifInfo dbGif = await FavGifsRepo().insert(gif);
     yield StatusFavGifsState(dbGif.innerId != null
         ? "Гифка добавлена в избранное"
         : "Гифка уже в избранном");
@@ -34,7 +34,7 @@ class RemoveFavGifsEvent extends FavGifsEvent {
   @override
   Stream<FavGifsState> applyAsync(
       {FavGifsState currentState, FavGifsBloc bloc}) async* {
-    await FavGifRepo().delete(gif.innerId);
+    await FavGifsRepo().delete(gif.innerId);
     yield DeletedFavGifsState();
     bloc.add(LoadFavGifsEvent());
   }
@@ -46,7 +46,7 @@ class LoadFavGifsEvent extends FavGifsEvent {
       {FavGifsState currentState, FavGifsBloc bloc}) async* {
     try {
       yield UnFavGifsState();
-      yield new InFavGifsState(await FavGifRepo().getAllFavGifs());
+      yield new InFavGifsState(await FavGifsRepo().getAllFavGifs());
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadFavGifsEvent', error: _, stackTrace: stackTrace);

@@ -85,7 +85,8 @@ class AllGifsScreenState extends State<AllGifsScreen> {
                   crossAxisCount: 4,
                   mainAxisSpacing: 4.0,
                   crossAxisSpacing: 4.0,
-                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
+                  staggeredTileBuilder: (int index) =>
+                      new StaggeredTile.fit(index >= state.gifs.length ? 4 : 2),
                   itemBuilder: (BuildContext context, int index) {
                     return index >= state.gifs.length
                         ? BottomLoader()

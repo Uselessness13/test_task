@@ -1,7 +1,7 @@
 import 'package:Test_task/data/models/gif_info.dart';
 import 'package:sqflite/sqflite.dart';
 
-class FavGifRepo {
+class FavGifsRepo {
   final String tableGif = 'gif';
   final String columnId = 'inner_id';
   final String url = 'url';

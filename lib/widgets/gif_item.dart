@@ -1,3 +1,4 @@
+import 'package:Test_task/blocs/all_gifs/all_gifs_bloc.dart';
 import 'package:Test_task/data/models/gif_info.dart';
 import 'package:Test_task/fav_gifs/index.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _GifItemState extends State<GifItem> with TickerProviderStateMixin {
       vsync: this,
       child: Card(
         elevation: 5,
-        child: Stack(
+        child: Column(
           children: [
             Center(
               child: Image.network(
@@ -40,15 +41,12 @@ class _GifItemState extends State<GifItem> with TickerProviderStateMixin {
               ),
             ),
             widget.fav
-                ? Positioned(
-                    right: 0,
-                    child: IconButton(
-                        icon: Icon(Icons.delete_outline),
-                        onPressed: () {
-                          BlocProvider.of<FavGifsBloc>(context)
-                              .add(RemoveFavGifsEvent(widget.gifInfo));
-                        }),
-                  )
+                ? IconButton(
+                    icon: Icon(Icons.delete_outline),
+                    onPressed: () {
+                      BlocProvider.of<FavGifsBloc>(context)
+                          .add(RemoveFavGifsEvent(widget.gifInfo));
+                    })
                 : IconButton(
                     icon: Icon(
                       Icons.favorite,
