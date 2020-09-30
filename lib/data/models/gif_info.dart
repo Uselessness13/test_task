@@ -41,11 +41,10 @@ class GifInfo {
   factory GifInfo.fromMap(Map<String, dynamic> json) => GifInfo(
         innerId: json["inner_id"] == null ? null : json["inner_id"],
         id: json["id"] == null ? null : json["id"],
-        url: json["url"] == null
-            ? null
-            : json["url"],
+        url: json["url"] == null ? null : json["url"],
       );
   Map<String, dynamic> toMap() => {
+        "id": id == null ? null : id,
         "inner_id": innerId == null ? null : innerId,
         "url": url,
       };

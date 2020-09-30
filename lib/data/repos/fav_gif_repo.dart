@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 class FavGifsRepo {
   final String tableGif = 'gif';
   final String columnId = 'inner_id';
+  final String id = 'id';
   final String url = 'url';
 
   Future<Database> _db;
@@ -20,6 +21,7 @@ class FavGifsRepo {
       await db.execute('''
 create table $tableGif ( 
   $columnId integer primary key autoincrement, 
+  $id integer,
   $url text not null
   )
 ''');

@@ -1,4 +1,5 @@
 import 'package:Test_task/data/models/gif_info.dart';
+import 'package:Test_task/data/repos/fav_gif_repo.dart';
 import 'package:dio/dio.dart';
 
 class GiphyApiRepo {
@@ -13,7 +14,16 @@ class GiphyApiRepo {
         "offset": offset.toString(),
         "limit": limit.toString()
       });
-      return parseGifs(response.data['data']);
+      List<GifInfo> favGifs = await FavGifsRepo().getAllFavGifs();
+      List<GifInfo> remoteGifs = parseGifs(response.data['data']);
+      for (GifInfo gif in remoteGifs) {
+        try {
+          GifInfo needed =
+              favGifs.firstWhere((element) => element.id == gif.id);
+          gif.innerId = needed.innerId;
+        } catch (e) {}
+      }
+      return remoteGifs;
     } catch (e, _) {
       print("$e \n $_");
       return null;

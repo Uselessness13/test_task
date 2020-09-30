@@ -14,10 +14,19 @@ class GifItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _GifItemState createState() => _GifItemState();
+  _GifItemState createState() => _GifItemState(gifInfo);
 }
 
 class _GifItemState extends State<GifItem> with TickerProviderStateMixin {
+  GifInfo gifInfo;
+  _GifItemState(this.gifInfo);
+  bool faved = false;
+  @override
+  void initState() {
+    faved = gifInfo.innerId != null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSize(
@@ -49,12 +58,15 @@ class _GifItemState extends State<GifItem> with TickerProviderStateMixin {
                     })
                 : IconButton(
                     icon: Icon(
-                      Icons.favorite,
+                      faved ? Icons.favorite : Icons.favorite_border,
                       color: Colors.black,
                     ),
                     onPressed: () {
                       BlocProvider.of<FavGifsBloc>(context)
-                          .add(AddFavGifsEvent(widget.gifInfo));
+                          .add(AddFavGifsEvent(gifInfo));
+                      setState(() {
+                        faved = true;
+                      });
                     })
           ],
         ),
